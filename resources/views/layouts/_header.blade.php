@@ -33,12 +33,6 @@
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{{ route('users.edit', Auth::id()) }}">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                编辑资料
-                            </a>
-                        </li>
                         @can('manage_contents')
                         <li>
                             <a href="{{ url(config('administrator.uri')) }}">
@@ -47,6 +41,12 @@
                             </a>
                         </li>
                         @endcan
+                        <li>
+                            <a href="{{ route('users.edit', Auth::id()) }}">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                编辑资料
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
