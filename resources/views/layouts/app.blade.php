@@ -8,8 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', '报餐宝') - 轻松解决吃饭问题！</title>
-
+    <title>@yield('title', '报餐宝') - {{ setting('site_name', '轻松解决吃饭问题！') }}</title>
+    <meta name="description" content="@yield('description', setting('seo_description', ''))" />
+    <meta name="keyword" content="@yield('keyword', setting('seo_keyword', ''))" />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
