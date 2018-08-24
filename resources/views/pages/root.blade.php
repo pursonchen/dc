@@ -11,10 +11,10 @@
             <div class="media-body">
               <hr>
               <div align="center">
-                <img class="img-circle" src="https://lccdn.phphub.org/uploads/avatars/1_1530614766.png?imageView2/1/w/200/h/200" width="140" height="140">
+                <img class="img-circle" src="{{Auth::user()->avatar}}" width="140" height="140">
                 <br>
               </div>
-              <div align="center"><p>测试用户</p></div>
+              <div align="center"><p>{{Auth::user()->name}}</p></div>
               <hr>
               <h5><strong>部门</strong></h5>
               <p>人力资源部</p>

@@ -12,12 +12,12 @@ class PagesController extends Controller
         $this->middleware('auth', ['except' => ['permission-denied']]);
     }
 
-     public function root(User $user)
+     public function root()
     {
-        return view('pages.root', compact('user'));
+        return view('pages.root'); 
     }
 
-    public function record() 
+    public function record(User $user) 
     {
         return view('pages.record');
     }
