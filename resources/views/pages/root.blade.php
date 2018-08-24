@@ -7,7 +7,7 @@
         <div class="panel-body">
           <div class="media">
             <h5><strong>欢迎你！</strong></h5>
-            <p>当前时间：2018-8-21 星期二</p>
+            <p>当前时间：{{ $time }}</p>
             <div class="media-body">
               <hr>
               <div align="center">

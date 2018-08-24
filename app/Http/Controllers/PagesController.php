@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
@@ -14,7 +15,11 @@ class PagesController extends Controller
 
      public function root()
     {
-        return view('pages.root'); 
+       $dt = Carbon::now();
+       $time = $dt->formatLocalized('%Y-%B-%d %A');  
+
+
+        return view('pages.root', compact('time')); 
     }
 
     public function record(User $user) 

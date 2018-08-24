@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -63,5 +64,13 @@ class User extends Authenticatable
         }
 
         $this->attributes['avatar'] = $path;
+    }
+
+    /**
+     * 获得此用户所属部门。
+     */
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department', 'id');
     }
 }
