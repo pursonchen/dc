@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
+        public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['permission-denied']]);
+    }
+
      public function root(User $user)
     {
         return view('pages.root', compact('user'));
