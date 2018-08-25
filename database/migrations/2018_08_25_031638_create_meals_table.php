@@ -20,6 +20,7 @@ class CreateMealsTable extends Migration
             $table->time('order_end_time')->comment('订餐结束时间');
             $table->time('eat_start_time')->comment('用餐开始时间');
             $table->time('eat_end_time')->comment('用餐结束时间');
+            $table->timestamps();
         });
     }
 

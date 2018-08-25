@@ -15,4 +15,16 @@ class Dish extends Model
         'pic',
         'remark'
     ];
+
+    public function canteen()
+    {
+        return $this->belongsTo(Canteen::class);
+    }
+
+        public function dishtype()
+    {
+        return $this->belongsTo(Dishtype::class);
+    }
+
+   
 }

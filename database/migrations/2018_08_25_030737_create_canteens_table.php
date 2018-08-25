@@ -17,6 +17,7 @@ class CreateCanteensTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address')->comment('餐厅地址');
+            $table->timestamps();
         });
     }
 

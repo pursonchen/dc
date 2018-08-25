@@ -17,11 +17,14 @@ class CreateDishesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('dishtype_id')->comment('菜品类别id');
+            $table->foreign('dishtype_id')->references('id')->on('dishtypes')->onDelete('cascade');
             $table->integer('canteen_id')->comment('餐厅id');
+            $table->foreign('canteen_id')->references('id')->on('canteens');
             $table->string('unit')->comment('计量单位');
-            $table->decimal('price', 6, 2)->comment('单价 6位整数2位有效数字');
+            $table->decimal('price', 5, 2)->comment('单价 6位整数2位有效数字');
             $table->string('pic')->comment('图片');
             $table->string('remark')->comment('备注');
+            $table->timestamps();
         });
     }
 
