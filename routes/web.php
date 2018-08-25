@@ -13,8 +13,6 @@
 Route::get('/', 'PagesController@root')->name('root');
 Route::get('/record', 'PagesController@record')->name('record');
 
-// dashboard
-Route::get('/dashboard', 'DashboardController@root')->name('dashboard');
 
 
 // Authentication Routes...
