@@ -10,5 +10,9 @@ class Canteen extends Model
         'name',
         'address'
     ];
-
+    
+    public function dishes()
+    {
+        return $this->hasMany('App\Models\Dish');
+    }
 }

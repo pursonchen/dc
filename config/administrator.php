@@ -30,12 +30,19 @@ return array(
 *  ]
 */
 'menu' => [
-'用户与权限' => [
-'users',
-'roles',
-'permissions',
-],
-'站点管理' => [
+     '用户与权限' => [
+         'departments',
+         'users',
+         'roles',
+         'permissions',
+     ],
+     '订餐相关' => [ 
+        'canteens',
+        'meals',
+        'dishtypes',
+        'dishes',
+     ],
+     '站点管理' => [
             'settings.site',
         ],
 ],
