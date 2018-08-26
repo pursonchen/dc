@@ -57,3 +57,4 @@ if (token) {
 
 window.moment = require('moment');
 
+window.Spinner=require('spin');

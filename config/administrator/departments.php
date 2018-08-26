@@ -24,7 +24,11 @@ return [
         'name' => [
             'title'    => '部门名称',
             
-        ]
+        ],
+        'operation' => [
+            'title'  => '管理',
+            'sortable' => false,
+        ],
     ],
 
     'edit_fields' => [

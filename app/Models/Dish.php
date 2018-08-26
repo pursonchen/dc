@@ -24,6 +24,11 @@ class Dish extends Model
         public function dishtype()
     {
         return $this->belongsTo(Dishtype::class);
+    }        
+
+    public function meal()
+    {
+        return $this->belongsTo(Meal::class);
     }
 
    

@@ -42,6 +42,10 @@ return [
             // 是否允许排序
             'sortable' => false,
         ],
+        'operation' => [
+            'title'  => '管理',
+            'sortable' => false,
+        ],
     ],
 
     'edit_fields' => [

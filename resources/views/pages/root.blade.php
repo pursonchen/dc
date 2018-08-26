@@ -7,7 +7,7 @@
         <div class="panel-body">
           <div class="media">
             <h5><strong>欢迎你！</strong></h5>
-            <p>当前时间：{{ $time }}</p>
+            <p>当前时间：{{ $today }}</p>
             <div class="media-body">
               <hr>
               <div align="center">
@@ -17,7 +17,7 @@
               <div align="center"><p>{{Auth::user()->name}}</p></div>
               <hr>
               <h5><strong>部门</strong></h5>
-              <p>人力资源部</p>
+              <p>{{ Auth::user()->department->name }}</p>
             </div>
           </div>
         </div>
@@ -27,14 +27,14 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h5>开始订餐：</h5>
-          <hr>
+          <hr>  
           <div class="row">
             <div class='col-sm-6'>
               <div class="form-group">
                 <label>选择日期：</label>
                 <!--指定 date标记-->
-                <div class='input-group date' id='datetimepicker1'>
-                  <input type='text' class="form-control" />
+                <div class='input-group date' >
+                  <input type='text' id='datetimepicker' class="form-control" value="{{ $tomorrow }}"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -45,9 +45,10 @@
           <div class="row">
             <div class="col-sm-6">
               <label for="name">订餐餐厅：</label>
-              <select class="form-control">
-                <option>第一食堂</option>
-                <option>第二食堂</option>
+              <select class="form-control" id="canteen_select">
+                @foreach($canteens as $canteen)
+                <option value="{{ $canteen->id }}">{{ $canteen->name }}</option>
+                 @endforeach
               </select>
             </div>
           </div>
@@ -60,7 +61,7 @@
                   <input type="checkbox" id="bCheckbox" value="option1"> 早餐
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="lCheckbox" value="option2"  checked="checked"> 午餐
+                  <input type="checkbox" id="lCheckbox" value="option2"> 午餐
                 </label>
                 <label class="checkbox-inline">
                   <input type="checkbox" id="sCheckbox" value="option3"> 晚餐
@@ -70,38 +71,30 @@
           </div>
           <br>
           <hr>
+            <div id="spin"></div>
           <div class="row">
             <div id="breakfastlist" class="col-sm-4" style="display: none;">
-              <div class="list-group">
+              <div class="list-group" id="bListItem">
                 <a href="#" class="list-group-item active" >
                   早餐菜式
                 </a>
-                <span class="list-group-item">白粥<input type="checkbox" id="bCheckbox1" value="bCheckbox1"></span>
-                <span class="list-group-item">油条<input type="checkbox" id="bCheckbox2" value="bCheckbox1"></span>
-                <span class="list-group-item">豆浆<input type="checkbox" id="bCheckbox3" value="bCheckbox1"></span>
-                <span class="list-group-item">炒粉<input type="checkbox" id="bCheckbox4" value="bCheckbox1"></span>
+ 
               </div>
             </div>
-            <div id="lunchlist" class="col-sm-4">
-              <div class="list-group">
-                <a href="#" class="list-group-item active">
+            <div id="lunchlist" class="col-sm-4" style="display: none;">
+              <div class="list-group" id="lListItem">
+                <a href="#" class="list-group-item active" >
                   午餐菜式
                 </a>
-                <span class="list-group-item">清蒸鲮鱼<input type="checkbox" id="lCheckbox1" value="lCheckbox1"></span>
-                <span class="list-group-item">鱼香茄子<input type="checkbox" id="lCheckbox1" value="lCheckbox1"></span>
-                <span class="list-group-item">通心菜<input type="checkbox" id="lCheckbox1" value="lCheckbox1"></span>
-                <span class="list-group-item">菜干煲猪骨<input type="checkbox" id="lCheckbox1" value="lCheckbox1"></span>
+ 
               </div>
             </div>
             <div id="supperlist" class="col-sm-4" style="display: none;">
-              <div class="list-group" >
+              <div class="list-group" id="sListItem">
                 <a href="#" class="list-group-item active" >
                   晚餐菜式
                 </a>
-                <span href="#" class="list-group-item">酿豆腐<input type="checkbox" id="sCheckbox1" value="sCheckbox1"></span>
-                <span href="#" class="list-group-item">东坡肉<input type="checkbox" id="sCheckbox1" value="sCheckbox1"></span>
-                <span href="#" class="list-group-item">卤水鸡翼<input type="checkbox" id="sCheckbox1" value="sCheckbox1"></span>
-                <span href="#" class="list-group-item">清补凉<input type="checkbox" id="sCheckbox1" value="sCheckbox1"></span>
+ 
               </div>
             </div>
           </div>

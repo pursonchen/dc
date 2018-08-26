@@ -24,7 +24,10 @@ return [
         'name' => [
             'title'    => '菜类名称',
             
-        ]
+        ],'operation' => [
+            'title'  => '管理',
+            'sortable' => false,
+        ],
     ],
 
     'edit_fields' => [

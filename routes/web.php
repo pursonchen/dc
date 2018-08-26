@@ -11,7 +11,13 @@
 |
 */
 Route::get('/', 'PagesController@root')->name('root');
+
+// create order
+Route::post('/', 'PagesController@neworder');
 Route::get('/record', 'PagesController@record')->name('record');
+
+// ajax get dishes
+Route::post('/getdish', 'PagesController@getdish');
 
 
 
@@ -33,6 +39,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
+
 
  
 

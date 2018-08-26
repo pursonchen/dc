@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Dish;
+use App\Models\Canteen;
+
 
 class PagesController extends Controller
 {
@@ -15,11 +19,36 @@ class PagesController extends Controller
 
      public function root()
     {
-       $dt = Carbon::now();
-       $time = $dt->formatLocalized('%Y-%B-%d %A');  
+       $today = Carbon::today()->format("Y-m-d");
+       
+       $tomorrow = Carbon::tomorrow()->format("Y-m-d"); 
+        
+       $canteens = Canteen::all();
 
+        return view('pages.root', compact('today','tomorrow', 'canteens')); 
+    }
 
-        return view('pages.root', compact('time')); 
+    public function neworder(Request $request, Order $order)
+    {
+        $order->fill($request->all());
+        $order->user_id = Auth::id();
+        $order->save();
+
+        return redirect()->to($order->link())->with('success', '成功创建主题！');
+    }
+
+   //ajax 获取菜谱
+    public function getdish(Request $request) 
+    {
+
+        $today = Carbon::today();
+
+       if($request -> date >=  $today && $request -> canteen_id !== null && $request -> meal_id !== null)
+       {
+           return  Dish::where('date','=',$request -> date)->where('canteen_id','=',$request -> canteen_id)->where('meal_id','=',$request -> meal_id)->get();
+       }
+
+       return 0;
     }
 
     public function record(User $user) 
