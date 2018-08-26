@@ -35,7 +35,10 @@
 const BREAKFAST_MEAL_ID = 1;
 const LUNCH_MEAL_ID = 2;
 const SUPPER_MEAL_ID =3;
-  
+var breakfastLoaded = false;
+var lunchLoaded = false;
+var supperLoaded = false;
+  //当日期和餐厅改变时无法加载 需要加个spin动画  
 $(function () {
     // 初始化日期控件
     $('#datetimepicker1').datetimepicker({
@@ -49,7 +52,11 @@ $(function () {
             $("#breakfastlist").show();
             
             // ajax获取菜单
-            meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),BREAKFAST_MEAL_ID);
+            if(!breakfastLoaded)
+            {
+
+              meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),BREAKFAST_MEAL_ID);
+            }
 
          } else {
                $("#breakfastlist").hide();
@@ -60,6 +67,11 @@ $(function () {
     $("#lCheckbox").click(function () {
           if ($(this).prop("checked")) {
                $("#lunchlist").show();
+          if(!lunchLoaded)
+          {
+            meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),LUNCH_MEAL_ID);
+          }
+
          } else {
                $("#lunchlist").hide();
           }
@@ -69,6 +81,12 @@ $(function () {
     $("#sCheckbox").click(function () {
           if ($(this).prop("checked")) {
                $("#supperlist").show();
+               if(!supperLoaded)
+               {
+
+               meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),SUPPER_MEAL_ID);
+               }
+
          } else {
                $("#supperlist").hide();
           }
@@ -77,17 +95,20 @@ $(function () {
    
 
 
-    // 按钮弹窗 ajax 请求菜式
+    // 按钮弹窗  
 $('#submit').click(function () {
 $('.popover-show').popover('show');
     });
 });
-  Spinner.spin();
+
+// 监听日期变化，清空list
+ // $('#datetimepicker1').bind('input propertychange', function() {
+ //        $('#bListItem').html($(this).val().length + ' characters');
+ //    });
 
 // ajax 获取菜单
 function meal_ajax(date, canteen_id, meal_id)
 {
-  var spinTarget = $('#spin');
   $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -104,18 +125,21 @@ function meal_ajax(date, canteen_id, meal_id)
                         {
                           case 1:
                               for(var i = 0; i < data.length; i++){
-                                $('#bListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="bCheckbox1" value="'+data[i].id+'"></span>' );
+                                $('#bListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="bCheckbox'+i+'" value="'+data[i].id+'"></span>' );
                               } 
+                              breakfastLoaded = true;
                           break;
                           case 2:
                                for(var i = 0; i < data.length; i++){
-                                $('#lListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="bCheckbox1" value="'+data[i].id+'"></span>' );
+                                $('#lListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="lCheckbox'+i+'" value="'+data[i].id+'"></span>' );
                               } 
+                              lunchLoaded = true;
                           break;
                           case 3:
                               for(var i = 0; i < data.length; i++){
-                                $('#sListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="bCheckbox1" value="'+data[i].id+'"></span>' );
+                                $('#sListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="sCheckbox'+i+'" value="'+data[i].id+'"></span>' );
                               } 
+                              supperLoaded = true;
                           }
                         },
                        error:function(data){
