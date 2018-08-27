@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -72,5 +73,18 @@ class User extends Authenticatable
     public function department()
     {
         return $this->belongsTo('App\Models\Department', 'id');
+    } 
+
+    /**
+     * 获得此用户所有订单。
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function items()
+    {
+        return $this->hasManyThrough('App\Models\OrderItem', 'App\Models\Order');
     }
 }

@@ -6,6 +6,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="media">
+           
             <h5><strong>欢迎你！</strong></h5>
             <p>当前时间：{{ $today }}</p>
             <div class="media-body">
@@ -26,7 +27,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
-          <form action="{{ route('neworder') }}" method="POST" accept-charset="UTF-8">
+          <form action="{{ route('orderstore') }}" method="POST" accept-charset="UTF-8">
           <h5>开始订餐：</h5>
           <hr>  
           <div class="row">
@@ -35,7 +36,7 @@
                 <label>选择日期：</label>
                 <!--指定 date标记-->
                 <div class='input-group date' >
-                  <input type='text' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>
+                  <input type='text' name='date' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -47,7 +48,7 @@
             <div class="col-sm-6">
               <label for="name">订餐餐厅：</label>
               <div class="form-group">
-              <select class="form-control" id="canteen_select">
+              <select class="form-control" id="canteen_select" name='canteen'>
                 @foreach($canteens as $canteen)
                 <option value="{{ $canteen->id }}">{{ $canteen->name }}</option>
                  @endforeach
@@ -62,13 +63,13 @@
              <div class="form-group">
               <div>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="bCheckbox" value="option1"> 早餐
+                  <input type="checkbox" id="bCheckbox" value="1" name='mckbox[]'> 早餐
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="lCheckbox" value="option2"> 午餐
+                  <input type="checkbox" id="lCheckbox" value="2" name='mckbox[]'> 午餐
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="sCheckbox" value="option3"> 晚餐
+                  <input type="checkbox" id="sCheckbox" value="3" name='mckbox[]'> 晚餐
                 </label>
               </div>
             </div>
@@ -106,10 +107,7 @@
              </div>
           </div>
         
-          <button id='submit' type="submit" class="btn btn-primary popover-show" 
-      title="通知" data-container="body" 
-      data-toggle="popover" 
-      data-content="恭喜您，订餐成功！">
+          <button id='submit' type="submit" class="btn btn-primary">
     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>提交订餐
   </button>
 </form>

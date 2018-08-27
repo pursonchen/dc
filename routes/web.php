@@ -13,7 +13,7 @@
 Route::get('/', 'PagesController@root')->name('root');
 
 // create order
-Route::post('/', 'PagesController@neworder')->name('neworder');
+Route::post('/', 'PagesController@orderstore')->name('orderstore');
 Route::get('/record', 'PagesController@record')->name('record');
 
 // ajax get dishes

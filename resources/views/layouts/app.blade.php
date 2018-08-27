@@ -103,13 +103,6 @@ $(function () {
           }
       });
 
-   
-
-
-    // 按钮弹窗  
-$('#submit').click(function () {
-$('.popover-show').popover('show');
-    });
 });
 
 // 监听变化后，清空list
@@ -156,19 +149,19 @@ function meal_ajax(date, canteen_id, meal_id)
                         {
                           case 1:
                               for(var i = 0; i < data.length; i++){
-                                $('#bListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="bCheckbox'+i+'" value="'+data[i].id+'"></span>' );
+                                $('#bListItem').append( ' <span class="list-group-item">'+data[i].name+data[i].price+' 元/'+data[i].unit+'<input type="checkbox" id="bCheckbox'+i+'" name="listItems[]" value="'+data[i].id+'"></span>' );
                               } 
                               breakfastLoaded = true;
                           break;
                           case 2:
                                for(var i = 0; i < data.length; i++){
-                                $('#lListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="lCheckbox'+i+'" value="'+data[i].id+'"></span>' );
+                                $('#lListItem').append( ' <span class="list-group-item">'+data[i].name+data[i].price+' 元/'+data[i].unit+'<input type="checkbox" id="lCheckbox'+i+'" name="listItems[]" value="'+data[i].id+'"></span>' );
                               } 
                               lunchLoaded = true;
                           break;
                           case 3:
                               for(var i = 0; i < data.length; i++){
-                                $('#sListItem').append( ' <span class="list-group-item">'+data[i].name+'<input type="checkbox" id="sCheckbox'+i+'" value="'+data[i].id+'"></span>' );
+                                $('#sListItem').append( ' <span class="list-group-item">'+data[i].name+data[i].price+' 元/'+data[i].unit+'<input type="checkbox" id="sCheckbox'+i+'" name="listItems[]" value="'+data[i].id+'"></span>' );
                               } 
                               supperLoaded = true;
                           }
