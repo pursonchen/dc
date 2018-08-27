@@ -14,10 +14,6 @@
             </a>
         </div>
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li class="{{ active_class(if_route('record')) }}"><a  href="{{ route('record') }}">报餐记录</a></li>
-            </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
@@ -47,21 +43,26 @@
                                 编辑资料
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                退出登录
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                @endguest
-            </ul>
-        </div>
+                        <li class="{{ active_class(if_route('record')) }}"><a  href="{{ route('record', Auth::id()) }}">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            报餐记录
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                            退出登录
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @endguest
+        </ul>
     </div>
+</div>
 </nav>

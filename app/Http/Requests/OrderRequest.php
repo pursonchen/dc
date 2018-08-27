@@ -21,7 +21,7 @@ class OrderRequest extends Request
     {
         return [
             'date.after' => '订餐日期必须大于今天',
-            'listItems' => '必须填写菜单信息',
+            'listItems.required' => '必须填写菜单信息',
         ];
     }
 }

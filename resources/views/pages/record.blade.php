@@ -22,39 +22,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <div class="hidden">
+                                {{$i = 1}}
+                            </div>
+                            @foreach($userItems as $item)
                             <tr>
-                                <td>1</td>
-                                <td>2018-03-01</td>
-                                <td>第一饭堂</td>
-                                <td>早餐</td>
-                                <td>瘦肉粥；油条；</td>
+                                <td>{{$i++}}</td>
+                                <td>{{$item->items[0]->order_date}}</td>
+                                <td>第{{$item->items[0]->canteen_id}}饭堂</td>
+                                <td>{{$item->items[0]->meal_id}}</td>
+                                <td>
+                               @foreach($item->items as $data)
+                                {{ $data->dish_id }} ;
+                               @endforeach
+                               </td>
 <!--                                 <td>是</td>
                                 <td>13.80元</td>
                                 <td>微信</td> -->
-                                <td><button type="button" class="btn btn-xs btn-danger">撤销</button></td>
+                                <td><button type="button" class="btn btn-xs btn-danger" disabled>撤销</button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2018-05-02</td>
-                                <td>第二饭堂</td>
-                                <td>午餐</td>
-                                <td>鱼腥草煲猪骨；通心菜；酿油炸；</td>
-<!--                                 <td>是</td>
-                                <td>13.80元</td>
-                                <td>微信</td> -->
-                                <td><button type="button" class="btn btn-xs btn-danger">撤销</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>2018-08-22</td>
-                                <td>第三饭堂</td>
-                                <td>晚餐</td>
-                                <td>烧鸡腿；虾；胡椒猪肚；</td>
-<!--                                 <td>是</td>
-                                <td>13.80元</td>
-                                <td>微信</td> -->
-                                <td><button type="button" class="btn btn-xs btn-danger">撤销</button></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <hr>

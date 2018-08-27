@@ -111,7 +111,9 @@ class PagesController extends Controller
 
     public function record(User $user) 
     {
-        return view('pages.record');
+        $userItems = User::with('items','orders')->where('id','=',$user->id)->get();
+
+        return view('pages.record',compact('userItems'));
     }
 
     public function permissionDenied()
