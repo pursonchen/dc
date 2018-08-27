@@ -56,4 +56,13 @@ if (token) {
 
 
 window.moment = require('moment');
-
+let Spinner = require('./spin');
+                    var option = {
+                        lines: 9, // 花瓣数目
+                        length: 1, // 花瓣长度
+                        width: 10, // 花瓣宽度
+                        radius: 15, // 花瓣距中心半径
+                        shadow: true,
+                        opacity:1/8
+                    };
+window.spinner = new Spinner(option);

@@ -38,12 +38,23 @@ const SUPPER_MEAL_ID =3;
 var breakfastLoaded = false;
 var lunchLoaded = false;
 var supperLoaded = false;
-  //当日期和餐厅改变时无法加载 需要加个spin动画  
+var target = document.getElementById('spin');
+
+  //当日期和餐厅改变时无法加载  
 $(function () {
     // 初始化日期控件
     $('#datetimepicker1').datetimepicker({
         format: 'YYYY-MM-DD',
         locale: moment.locale('zh-cn')
+    }).on('dp.change', function(e){
+          // 当日期改变，自动移除早餐菜单
+          resetList();
+    });
+
+    // 监听canteen_select 的变化
+    $("#canteen_select").change(function(event) {
+          
+           resetList();
     });
 
    // 控制早餐别菜单隐藏显示
@@ -55,7 +66,7 @@ $(function () {
             if(!breakfastLoaded)
             {
 
-              meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),BREAKFAST_MEAL_ID);
+              meal_ajax($("#datetimepicker1").val(),$("#canteen_select").val(),BREAKFAST_MEAL_ID);
             }
 
          } else {
@@ -69,7 +80,7 @@ $(function () {
                $("#lunchlist").show();
           if(!lunchLoaded)
           {
-            meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),LUNCH_MEAL_ID);
+            meal_ajax($("#datetimepicker1").val(),$("#canteen_select").val(),LUNCH_MEAL_ID);
           }
 
          } else {
@@ -84,7 +95,7 @@ $(function () {
                if(!supperLoaded)
                {
 
-               meal_ajax($("#datetimepicker").val(),$("#canteen_select").val(),SUPPER_MEAL_ID);
+               meal_ajax($("#datetimepicker1").val(),$("#canteen_select").val(),SUPPER_MEAL_ID);
                }
 
          } else {
@@ -101,11 +112,26 @@ $('.popover-show').popover('show');
     });
 });
 
-// 监听日期变化，清空list
- // $('#datetimepicker1').bind('input propertychange', function() {
- //        $('#bListItem').html($(this).val().length + ' characters');
- //    });
+// 监听变化后，清空list
+function resetList()
+{
+          $('#bListItem').find('span').remove();
+          $("#breakfastlist").hide();
+          $("#bCheckbox").prop("checked",false);
+          breakfastLoaded =false;
 
+          $('#lListItem').find('span').remove();
+          $("#lunchlist").hide();
+          $("#lCheckbox").prop("checked",false);
+          lunchLoaded =false;
+
+          $('#sListItem').find('span').remove();
+          $("#supperlist").hide();
+          $("#sCheckbox").prop("checked",false);
+          supperLoaded =false;
+}
+        
+     
 // ajax 获取菜单
 function meal_ajax(date, canteen_id, meal_id)
 {
@@ -118,6 +144,11 @@ function meal_ajax(date, canteen_id, meal_id)
                     data: {'date':date ,'canteen_id':canteen_id, 'meal_id':meal_id},
                     dataType: 'json',
                     async : 'false',    //同步
+                    beforeSend: function () {
+
+                    
+                    spinner.spin(target);//显示加载
+                },
                     success: function(data){
                           console.log(data);
                       
@@ -144,11 +175,13 @@ function meal_ajax(date, canteen_id, meal_id)
                         },
                        error:function(data){
                         console.log(data);
-                       }
+                       },
+                        complete: function () {
+                              spinner.spin();//移除加载
+                }
                 });
 }
  
     </script>
-}
 </body>
 </html>

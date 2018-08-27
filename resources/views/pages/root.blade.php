@@ -34,7 +34,7 @@
                 <label>选择日期：</label>
                 <!--指定 date标记-->
                 <div class='input-group date' >
-                  <input type='text' id='datetimepicker' class="form-control" value="{{ $tomorrow }}"/>
+                  <input type='text' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
