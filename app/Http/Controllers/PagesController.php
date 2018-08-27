@@ -30,11 +30,16 @@ class PagesController extends Controller
 
     public function neworder(Request $request, Order $order)
     {
-        $order->fill($request->all());
-        $order->user_id = Auth::id();
-        $order->save();
+        // $order->fill($request->all());
+        // $order->user_id = Auth::id();
+        // $order->save();
 
-        return redirect()->to($order->link())->with('success', '成功创建主题！');
+       $today = Carbon::today()->format("Y-m-d");
+       
+       $tomorrow = Carbon::tomorrow()->format("Y-m-d"); 
+        
+       $canteens = Canteen::all();
+        return redirect()->route('root')->with('success', '成功订餐！');
     }
 
    //ajax 获取菜谱

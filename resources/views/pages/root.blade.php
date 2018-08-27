@@ -26,6 +26,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
+          <form action="{{ route('neworder') }}" method="POST" accept-charset="UTF-8">
           <h5>开始订餐：</h5>
           <hr>  
           <div class="row">
@@ -45,17 +46,20 @@
           <div class="row">
             <div class="col-sm-6">
               <label for="name">订餐餐厅：</label>
+              <div class="form-group">
               <select class="form-control" id="canteen_select">
                 @foreach($canteens as $canteen)
                 <option value="{{ $canteen->id }}">{{ $canteen->name }}</option>
                  @endforeach
               </select>
             </div>
+            </div>
           </div>
-          <br>
+          
           <div class="row">
             <div class="col-sm-6">
               <label for="name">订餐餐别：</label>
+             <div class="form-group">
               <div>
                 <label class="checkbox-inline">
                   <input type="checkbox" id="bCheckbox" value="option1"> 早餐
@@ -69,9 +73,11 @@
               </div>
             </div>
           </div>
-          <br>
+        </div>
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <hr>
             <div id="spin"></div>
+            <div class="form-group">
           <div class="row">
             <div id="breakfastlist" class="col-sm-4" style="display: none;">
               <div class="list-group" id="bListItem">
@@ -97,13 +103,16 @@
  
               </div>
             </div>
+             </div>
           </div>
-          <button id='submit' type="button" class="btn btn-primary popover-show" 
+        
+          <button id='submit' type="submit" class="btn btn-primary popover-show" 
       title="通知" data-container="body" 
       data-toggle="popover" 
       data-content="恭喜您，订餐成功！">
-    提交订餐
+    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>提交订餐
   </button>
+</form>
         </div>
       </div>
       <hr>
