@@ -66,12 +66,18 @@
                   @elseif($order->closed)
                     已关闭
                   @else
-                    未支付<br>
+                    有效
+                    <!-- 未支付<br>
                     请于 {{ $order->created_at->addSeconds(config('app.order_ttl'))->format('H:i') }} 前完成支付<br>
-                    否则订单将自动关闭
+                    否则订单将自动关闭 -->
                   @endif
                 </td>
-                <td rowspan="{{ count($order->items) }}" class="text-center"><a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a></td>
+                <td rowspan="{{ count($order->items) }}" class="text-center">
+                  <a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a>
+                  <br>
+                  <hr>
+                  <a class="btn btn-danger btn-xs" href="{{ route('orders.close', ['order' => $order->id]) }}">取消订单</a>
+                </td>
                 @endif
               </tr>
               @endforeach

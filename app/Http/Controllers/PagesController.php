@@ -32,28 +32,29 @@ class PagesController extends Controller
 
     public function orders(OrderRequest $request)
     {
+
+        if($request->date <= Carbon::today()->format("Y-m-d")) {
+          return redirect()->route('root')->with('danger', '不能订以前的菜式');
+        }
         $user  = $request->user();
          
          //判断是否曾经订餐 
         $booked = false;
-        $userItems = User::with('items')->where('id','=',$user->id)->get();
           $orders = Order::query()
-            // 使用 with 方法预加载，避免N + 1问题
-            ->with(['items.dish', 'items.meal','items.canteen','items.order']) 
+            ->with(['items.dish','items.order']) 
             ->where('user_id', $request->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        foreach ($userItems as $value) 
-        {
-           foreach ($value->items as $item) 
+           foreach ($orders as $index => $item) 
            {
-            if (Carbon::parse($item->order_date)->format("Y-m-d") === $request->date) {
+
+            if (Carbon::parse($item->order_date)->format("Y-m-d") === $request->date && $item->closed === false) {
                  $booked = true;
             }
             
            }
-        }
+
         
         if($booked)
             return redirect()->route('root')->with('danger', '已经订过了！');
@@ -104,9 +105,7 @@ class PagesController extends Controller
     public function getdish(Request $request) 
     {
 
-        $today = Carbon::today();
-
-       if($request -> date >=  $today && $request -> canteen_id !== null && $request -> meal_id !== null)
+       if($request -> canteen_id !== null && $request -> meal_id !== null)
        {
            return  Dish::where('date','=',$request -> date)->where('canteen_id','=',$request -> canteen_id)->where('meal_id','=',$request -> meal_id)->get();
        }
@@ -117,7 +116,8 @@ class PagesController extends Controller
 // 获取订餐记录
     public function orderslist(Request $request) 
     {
-
+       // 权限校验
+       
         $orders = Order::query()
             // 使用 with 方法预加载，避免N + 1问题
             ->with(['items.dish', 'items.meal','items.canteen','items.order']) 
@@ -138,10 +138,32 @@ class PagesController extends Controller
         return view('pages.permission_denied');
     }
 
+   // 订单详情
     public function ordershow(Order $order, Request $request)
     {
       // 权限校验
        $this->authorize('own', $order);
         return view('orders.show', ['order' => $order->load(['items.dish', 'items.meal','items.canteen','items.order'])]);
+    }
+
+    // 取消订单
+    public function orderclose(Order $order, Request $request)
+    {
+       $this->authorize('own', $order);
+       
+       $order->with(['items.dish', 'items.meal','items.canteen','items.order'])
+        ->where('user_id', $request->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+       
+       foreach ($order->items as $index => $item) {
+        // 只能提前一天取消
+          if (Carbon::parse($item->order_date)->format("Y-m-d") <= Carbon::today()->format('Y-m-d')) {
+           return redirect()->route('orders.list')->with('danger', '只能提前一天取消订餐');
+        }
+       }
+
+        $order->update(['closed' => true]);
+        return redirect()->route('orders.list')->with('success', '取消订餐成功！');
     }
 }
