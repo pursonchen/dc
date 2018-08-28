@@ -18,6 +18,9 @@ Route::get('/orders', 'PagesController@orderslist')->name('orders.list');
 Route::get('orders/{order}', 'PagesController@ordershow')->name('orders.show');
 Route::get('close/{order}','PagesController@orderclose')->name('orders.close');
 
+Route::get('reception', 'ReceptionController@reception')->name('reception');
+Route::post('reception', 'ReceptionController@store')->name('reception.store');
+Route::get('reception/list','ReceptionController@list')->name('reception.list');
 
 // ajax get dishes
 Route::post('/getdish', 'PagesController@getdish');

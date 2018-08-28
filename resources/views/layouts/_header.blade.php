@@ -43,9 +43,19 @@
                                 编辑资料
                             </a>
                         </li>
+                    <li class="{{ active_class(if_route('reception')) }}"><a  href="{{ route('reception') }}">
+                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                            报接待餐
+                        </a>
+                    </li>
                         <li class="{{ active_class(if_route('order.list')) }}"><a  href="{{ route('orders.list') }}">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                            报餐记录
+                            个人订餐记录
+                        </a>
+                    </li>                        
+                    <li class="{{ active_class(if_route('reception.list')) }}"><a  href="{{ route('reception.list') }}">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            接待订餐记录
                         </a>
                     </li>
                     <li>

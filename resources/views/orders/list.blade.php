@@ -23,9 +23,9 @@
                   <th class="text-center">餐厅</th>
                   <th class="text-center">餐别</th>
                   <th class="text-center">用餐日期</th>
-                  <th class="text-center">单价</th>
+                 <!--  <th class="text-center">单价</th>
                   <th class="text-center">数量</th>
-                  <th class="text-center">订单总价</th>
+                  <th class="text-center">订单总价</th> -->
                   <th class="text-center">状态</th>
                   <th class="text-center">操作</th>
                 </tr>
@@ -33,11 +33,11 @@
               @foreach($order->items as $index => $item)
               <tr>
                 <td class="dish-info">
-                  <div class="preview-order">
+<!--                   <div class="preview-order">
                     <a target="_blank" href="#">
                       <img src="{{ $item->dish->pic }}">
                     </a>
-                  </div>
+                  </div> -->
                   <div>
                     <span class="dish-title">
                        <a target="_blank" href="#">{{ $item->dish->name }}</a>
@@ -52,10 +52,10 @@
                 <td class="sku-amount text-center">
                     {{$item->order_date->format('Y-m-d')}}
                 </td>
-                <td class="sku-price text-center">￥{{ $item->price }}</td>
-                <td class="sku-amount text-center">{{ $item->amount }}</td>
+<!--                 <td class="sku-price text-center">￥{{ $item->price }}</td>
+                <td class="sku-amount text-center">{{ $item->amount }}</td> -->
                 @if($index === 0)
-                <td rowspan="{{ count($order->items) }}" class="text-center total-amount">￥{{ $order->total_amount }}</td>
+<!--                 <td rowspan="{{ count($order->items) }}" class="text-center total-amount">￥{{ $order->total_amount }}</td> -->
                 <td rowspan="{{ count($order->items) }}" class="text-center">
                   @if($order->paid_at)
                     @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
@@ -73,10 +73,10 @@
                   @endif
                 </td>
                 <td rowspan="{{ count($order->items) }}" class="text-center">
-                  <a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a>
+                  <a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">详情</a>
                   <br>
                   <hr>
-                  <a class="btn btn-danger btn-xs" href="{{ route('orders.close', ['order' => $order->id]) }}">取消订单</a>
+                  <a class="btn btn-danger btn-xs" href="{{ route('orders.close', ['order' => $order->id]) }}">撤餐</a>
                 </td>
                 @endif
               </tr>

@@ -49,6 +49,14 @@ $(function () {
     }).on('dp.change', function(e){
           // 当日期改变，自动移除早餐菜单
           resetList();
+    });   
+
+     $('#datetimepicker2').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    }).on('dp.change', function(e){
+          // 当日期改变，自动移除早餐菜单
+          resetList();
     });
 
     // 监听canteen_select 的变化
