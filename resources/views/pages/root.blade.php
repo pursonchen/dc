@@ -6,7 +6,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="media">
-           
+
             <h5><strong>欢迎你！</strong></h5>
             <p>当前时间：{{ $today }}</p>
             <div class="media-body">
@@ -27,7 +27,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
-          <form action="{{ route('orderstore') }}" method="POST" accept-charset="UTF-8">
+          <form action="{{ route('orders.store') }}" method="POST" accept-charset="UTF-8">
           <h5>开始订餐：</h5>
           <hr>  
           <div class="row">

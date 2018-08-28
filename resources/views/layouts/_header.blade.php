@@ -43,7 +43,7 @@
                                 编辑资料
                             </a>
                         </li>
-                        <li class="{{ active_class(if_route('record')) }}"><a  href="{{ route('record', Auth::id()) }}">
+                        <li class="{{ active_class(if_route('order.list')) }}"><a  href="{{ route('orders.list') }}">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                             报餐记录
                         </a>

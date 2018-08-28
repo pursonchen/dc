@@ -12,7 +12,7 @@ class OrderRequest extends Request
     public function rules()
     {
         return [
-            'date' => 'required|date|after:2018-8-26',
+            'date' => 'required|date',
              'listItems' => 'required|array',
         ];
     }
@@ -20,7 +20,7 @@ class OrderRequest extends Request
      public function messages()
     {
         return [
-            'date.after' => '订餐日期必须大于今天',
+            // 'date.after' => '订餐日期必须大于今天',
             'listItems.required' => '必须填写菜单信息',
         ];
     }

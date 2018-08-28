@@ -13,9 +13,9 @@
 Route::get('/', 'PagesController@root')->name('root');
 
 // create order
-Route::post('/', 'PagesController@orderstore')->name('orderstore');
-Route::get('/record/{user}', 'PagesController@record')->name('record');
-
+Route::post('/', 'PagesController@orders')->name('orders.store');
+Route::get('/orders', 'PagesController@orderslist')->name('orders.list');
+Route::get('orders/{order}', 'PagesController@ordershow')->name('orders.show');
 // ajax get dishes
 Route::post('/getdish', 'PagesController@getdish');
 

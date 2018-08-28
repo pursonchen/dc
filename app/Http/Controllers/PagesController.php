@@ -30,14 +30,19 @@ class PagesController extends Controller
         return view('pages.root', compact('today','tomorrow', 'canteens')); 
     }
 
-    public function orderstore(OrderRequest $request)
+    public function orders(OrderRequest $request)
     {
         $user  = $request->user();
          
          //判断是否曾经订餐 
         $booked = false;
         $userItems = User::with('items')->where('id','=',$user->id)->get();
-         
+          $orders = Order::query()
+            // 使用 with 方法预加载，避免N + 1问题
+            ->with(['items.dish', 'items.meal','items.canteen','items.order']) 
+            ->where('user_id', $request->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         foreach ($userItems as $value) 
         {
@@ -109,11 +114,18 @@ class PagesController extends Controller
        return 0;
     }
 
-    public function record(User $user) 
+// 获取订餐记录
+    public function orderslist(Request $request) 
     {
-        $userItems = User::with('items','orders')->where('id','=',$user->id)->get();
 
-        return view('pages.record',compact('userItems'));
+        $orders = Order::query()
+            // 使用 with 方法预加载，避免N + 1问题
+            ->with(['items.dish', 'items.meal','items.canteen','items.order']) 
+            ->where('user_id', $request->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('orders.list', ['orders' => $orders]);
     }
 
     public function permissionDenied()
@@ -124,5 +136,12 @@ class PagesController extends Controller
         }
         // 否则使用视图
         return view('pages.permission_denied');
+    }
+
+    public function ordershow(Order $order, Request $request)
+    {
+      // 权限校验
+       $this->authorize('own', $order);
+        return view('orders.show', ['order' => $order->load(['items.dish', 'items.meal','items.canteen','items.order'])]);
     }
 }
