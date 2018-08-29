@@ -9,6 +9,7 @@
     <h4>订单详情</h4>
   </div>
   <div class="panel-body">
+    <div style="overflow:scroll;">
     <table class="table">
       <thead>
         <tr>
@@ -45,9 +46,11 @@
       </tr>
       @endforeach
       <tr><td colspan="4"></td></tr>
+    
     </table>
+    </div>
     <div class="order-bottom">
-      <div class="order-info">
+      <div class="order-info ">
         <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
         <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
       </div>

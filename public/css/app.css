@@ -8572,6 +8572,11 @@ body {
 .orders-show-page .order-info .line .line-value {
   -ms-flex-negative: 100;
       flex-shrink: 100;
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .orders-show-page .order-summary {
