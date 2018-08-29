@@ -10,20 +10,22 @@ require('./bootstrap');
 require('./bootstrap-datetimepicker.min');
 
 
-//后台数据表
-window.d3 = require('d3');
+// require('./TableLock');
 
 //后台数据表
-window.c3 = require('./c3.min');
+// window.d3 = require('d3');
+
+// //后台数据表
+// window.c3 = require('./c3.min');
 
 window.Vue = require('vue');
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+// *
+//  * Next, we will create a fresh Vue application instance and attach it to
+//  * the page. Then, you may begin adding components to this application
+//  * or customize the JavaScript scaffolding to fit your unique needs.
+ 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

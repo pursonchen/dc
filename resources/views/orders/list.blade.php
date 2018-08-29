@@ -8,15 +8,35 @@
   <div class="panel-heading">订餐记录</div>
   <div class="panel-body">
     <ul class="list-group">
-      @foreach($orders as $order)
+      @foreach($orders as $key =>  $order)
       <li class="list-group-item">
+        <span class="badge center">#{{$key + 1}}</span>
         <div class="panel panel-default">
           <div class="panel-heading">
-            订单号：{{ $order->no }}
-            <span class="pull-right">{{ $order->created_at->format('Y-m-d H:i:s') }}</span>
+            <small><b>单号：</b>{{ $order->no }}</small>
+            <small class="text-muted"><br><b>下单时间：</b><span>{{ $order->created_at->format('Y-m-d H:i:s') }}</span></small>
+            <small class="pull-right">
+              <span class="label label-info">
+              @if($order->paid_at)
+                    @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
+                      已支付
+                    @else
+                      {{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}
+                    @endif
+                  @elseif($order->closed)
+                    已关闭
+                  @else
+                    有效
+                    <!-- 未支付<br>
+                    请于 {{ $order->created_at->addSeconds(config('app.order_ttl'))->format('H:i') }} 前完成支付<br>
+                    否则订单将自动关闭 -->
+                  @endif
+                  </span>
+            </small>
           </div>
           <div class="panel-body">
-            <table class="table table-bordered">
+          <div style="overflow:scroll;">
+            <table class="table table-bordered" style="width: 110%">
               <thead>
                 <tr>
                   <th>菜品信息</th>
@@ -26,7 +46,7 @@
                  <!--  <th class="text-center">单价</th>
                   <th class="text-center">数量</th>
                   <th class="text-center">订单总价</th> -->
-                  <th class="text-center">状态</th>
+                  <!-- <th class="text-center">状态</th> -->
                   <th class="text-center">操作</th>
                 </tr>
               </thead>
@@ -56,7 +76,7 @@
                 <td class="sku-amount text-center">{{ $item->amount }}</td> -->
                 @if($index === 0)
 <!--                 <td rowspan="{{ count($order->items) }}" class="text-center total-amount">￥{{ $order->total_amount }}</td> -->
-                <td rowspan="{{ count($order->items) }}" class="text-center">
+<!--                 <td rowspan="{{ count($order->items) }}" class="text-center">
                   @if($order->paid_at)
                     @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
                       已支付
@@ -67,11 +87,11 @@
                     已关闭
                   @else
                     有效
-                    <!-- 未支付<br>
+                      未支付<br>
                     请于 {{ $order->created_at->addSeconds(config('app.order_ttl'))->format('H:i') }} 前完成支付<br>
-                    否则订单将自动关闭 -->
+                    否则订单将自动关闭  
                   @endif
-                </td>
+                </td> -->
                 <td rowspan="{{ count($order->items) }}" class="text-center">
                   <a class="btn btn-primary btn-xs" href="{{ route('orders.show', ['order' => $order->id]) }}">详情</a>
                   <br>
@@ -82,6 +102,7 @@
               </tr>
               @endforeach
             </table>
+          </div>
           </div>
         </div>
       </li>

@@ -31,6 +31,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+ 
     <script>
 const BREAKFAST_MEAL_ID = 1;
 const LUNCH_MEAL_ID = 2;
@@ -111,6 +112,7 @@ $(function () {
           }
       });
 
+
 });
 
 // 监听变化后，清空list
@@ -182,7 +184,14 @@ function meal_ajax(date, canteen_id, meal_id)
                 }
                 });
 }
+
+// 初始化表格固定列
+// $(function(){
+//         $.fn.TableLock({table:'lockTable',lockRow:1,lockColumn:2,width:'100%',height:'300px'});
+//     });
  
     </script>
+    
+
 </body>
 </html>
