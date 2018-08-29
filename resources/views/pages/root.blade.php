@@ -27,13 +27,14 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
+          @include('common.error')
           <form action="{{ route('orders.store') }}" method="POST" accept-charset="UTF-8">
           <h5>开始订餐：</h5>
           <hr>  
           <div class="row">
             <div class='col-sm-6'>
               <div class="form-group">
-                <label>选择日期：</label>
+                <label>选择用餐日期：</label>
                 <!--指定 date标记-->
                 <div class='input-group date' >
                   <input type='text' name='date' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>

@@ -12,16 +12,18 @@ class OrderRequest extends Request
     public function rules()
     {
         return [
-            'date' => 'required|date',
-             'listItems' => 'required|array',
+            'date' => 'required|date|after:today',
+            'mckbox' => 'required',
+            'listItems' => 'required',
         ];
     }
 
      public function messages()
     {
         return [
-            // 'date.after' => '订餐日期必须大于今天',
+            'date.after' => '用餐日期必须晚于今天',
             'listItems.required' => '必须填写菜单信息',
+            'mckbox.required' => '必须填写餐别信息',
         ];
     }
 }

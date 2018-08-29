@@ -32,7 +32,7 @@ class PagesController extends Controller
 
     public function orders(OrderRequest $request)
     {
-
+        
         if($request->date <= Carbon::today()->format("Y-m-d")) {
           return redirect()->route('root')->with('danger', '不能订以前的菜式');
         }
@@ -41,15 +41,17 @@ class PagesController extends Controller
          //判断是否曾经订餐 
         $booked = false;
           $orders = Order::query()
-            ->with(['items.dish','items.order']) 
+            ->with('items')
             ->where('user_id', $request->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
+           
+       
 
            foreach ($orders as $index => $item) 
-           {
+           {             
 
-            if (Carbon::parse($item->order_date)->format("Y-m-d") === $request->date && $item->closed === false) {
+            if (Carbon::parse($item->items[0]->order_date)->format("Y-m-d") === $request->date && $item->closed === false) {
                  $booked = true;
             }
             
