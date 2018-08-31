@@ -36,7 +36,7 @@
                 <label>选择日期：</label>
                 <!--指定 date标记-->
                 <div class='input-group date' >
-                  <input type='text' name='date' id='datetimepicker2' class="form-control" value="{{ $tomorrow }}"/>
+                  <input type='text' name='sdate' id='datetimepicker2' class="form-control" value="{{ $tomorrow }}"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -50,7 +50,7 @@
                 <label>到</label>
                 <!--指定 date标记-->
                 <div class='input-group date' >
-                  <input type='text' name='date' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>
+                  <input type='text' name='edate' id='datetimepicker1' class="form-control" value="{{ $tomorrow }}"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -94,7 +94,9 @@
              <div class="col-sm-6">
              <div class="form-group">
               <label for="std">用餐标准（元/人）：</label>
-               <input type="text" class="form-control" id="std">
+               <input type="text" class="form-control" id="std" name="std">              
+               <label for="std">用餐人数：</label>
+               <input type="text" class="form-control" id="std" name="num">
 
             </div>
           </div>
@@ -102,15 +104,14 @@
           <div class="row">
              <div class="col-sm-6">
              <div class="form-group">
-              <label for="reason">接待事由：</label>
-               <input type="textarea" class="form-control" id="reason">
+              <label for="description">接待事由：</label>
+               <input type="textarea" class="form-control" id="description" name="description">
 
             </div>
           </div>
           </div>
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <hr>
-            <div id="spin"></div>
             <div class="form-group">
           
           </div>
