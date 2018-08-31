@@ -27,6 +27,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
+           @include('common.error')
           <form action="{{ route('reception.store') }}" method="POST" accept-charset="UTF-8">
           <h5>订接待餐：</h5>
           <hr>  
@@ -77,13 +78,13 @@
              <div class="form-group">
               <div>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="bCheckbox" value="1" name='mckbox[]'> 早餐
+                  <input type="radio" id="bCheckbox" value="1" name='mckbox'> 早餐
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="lCheckbox" value="2" name='mckbox[]'> 午餐
+                  <input type="radio" id="lCheckbox" value="2" name='mckbox'> 午餐
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="sCheckbox" value="3" name='mckbox[]'> 晚餐
+                  <input type="radio" id="sCheckbox" value="3" name='mckbox'> 晚餐
                 </label>
               </div>
             </div>

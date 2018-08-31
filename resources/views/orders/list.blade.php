@@ -2,6 +2,7 @@
 @section('title', '订餐记录')
 
 @section('content')
+@include('common.error')
 <div class="row">
 <div class="col-lg-10 col-lg-offset-1">
 <div class="panel panel-default">

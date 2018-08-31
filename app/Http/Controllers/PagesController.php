@@ -100,7 +100,7 @@ class PagesController extends Controller
             return $order;
         });
 
-        return redirect()->route('root')->with('success', '成功订餐！');
+        return redirect()->route('orders.list')->with('success', '成功订餐！');
     }
 
    //ajax 获取菜谱
