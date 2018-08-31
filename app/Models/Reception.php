@@ -12,6 +12,7 @@ class Reception extends Model
         'std',
         'num',
         'description',
+        'closed'
     ];
 
     
@@ -23,5 +24,10 @@ class Reception extends Model
     public function canteen()
     {
         return $this->belongsTo(Canteen::class);
+    }  
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
