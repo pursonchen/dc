@@ -21,8 +21,30 @@ return [
         'id' => [
             'title' => 'ID',
         ],
+        'dishtype_id' => [
+            'title'    => '菜类',
+            'output' => function ($type, $model) {
+                return $model->dishtype->name;
+            },
+        ],        
+        'meal_id' => [
+            'title'    => '餐别',
+            'output' => function ($meal, $model) {
+                return $model->meal->name;
+            },
+        ],        
+        'canteen_id' => [
+            'title'    => '餐厅',
+            'output' => function ($canteen, $model) {
+                return $model->canteen->name;
+            },
+        ],
         'name' => [
             'title'    => '菜品名称',
+            
+        ],  
+        'date' => [
+            'title'    => '上市日期',
             
         ],        
         'unit' => [
@@ -41,7 +63,11 @@ return [
 
             // 是否允许排序
             'sortable' => false,
-        ],
+        ],        
+        'remark' => [
+            'title'    => '备注',
+            
+        ],  
         'operation' => [
             'title'  => '管理',
             'sortable' => false,
@@ -49,6 +75,30 @@ return [
     ],
 
     'edit_fields' => [
+        'dishtype' => [
+            'title' => '菜类',
+             // 指定数据的类型为关联模型
+            'type'       => 'relationship',
+
+            // 关联模型的字段，用来做关联显示
+            'name_field' => 'name',
+        ],        
+        'meal' => [
+            'title' => '餐别',
+             // 指定数据的类型为关联模型
+            'type'       => 'relationship',
+
+            // 关联模型的字段，用来做关联显示
+            'name_field' => 'name',
+        ],        
+        'canteen' => [
+            'title' => '餐厅',
+             // 指定数据的类型为关联模型
+            'type'       => 'relationship',
+
+            // 关联模型的字段，用来做关联显示
+            'name_field' => 'name',
+        ],
         'name' => [
             'title'    => '菜品名称',
             
@@ -60,6 +110,10 @@ return [
         'price' => [
             'title'    => '单价',
             
+        ],
+        'date' => [
+            'title'    => '上市日期',
+            
         ],        
         'pic' => [
             'title'    => '图片',
@@ -70,8 +124,28 @@ return [
 
             // 图片上传必须设置图片存放路径
             'location' => public_path() . '/uploads/images/dishes/',
-    ]
+    ],
+       'remark' => [
+            'title'    => '备注',
+            
+        ],  
 ],
+// 『数据过滤』设置
+    'filters' => [
+        'id' => [
 
+            // 过滤表单条目显示名称
+            'title' => '菜品 ID',
+        ],
+        'name' => [
+            'title' => '菜品名称',
+        ],
+        'meal' => [
+            'title' => '餐别',
+        ],
+        'dishtype' => [
+            'title' => '菜类',
+        ],
+    ],
 
 ];

@@ -13,6 +13,6 @@ class Canteen extends Model
     
     public function dishes()
     {
-        return $this->hasMany('App\Models\Dish');
+        return $this->hasMany(Dish::class);
     }
 }

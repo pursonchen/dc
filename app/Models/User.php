@@ -72,7 +72,7 @@ class User extends Authenticatable
      */
     public function department()
     {
-        return $this->belongsTo('App\Models\Department', 'id');
+        return $this->belongsTo(Department::class);
     } 
 
     /**

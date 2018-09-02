@@ -39,6 +39,17 @@ return [
             'sortable' => false,
         ],
 
+        'department_id' => [
+            'title' => '单位',
+            'output' => function ($name, $model) {
+                return $model->department->name;
+            },
+        ],
+
+        'title' => [
+            'title' => '职务',
+        ],
+
         'name' => [
             'title'    => '用户名',
             'sortable' => false,
@@ -46,22 +57,57 @@ return [
                 return '<a href="/users/'.$model->id.'" target=_blank>'.$name.'</a>';
             },
         ],
+        
+        'mobile' => [
+            'title' => '手机号码',
+            'sortable' => false,
+        ],  
 
         'email' => [
             'title' => '邮箱',
-        ],
+        ],        
+        'weixin_openid' => [
+            'title' => 'openid',
+        ],        
+        'weixin_unionid' => [
+            'title' => 'unionid',
+        ],   
+        'gender' => [
+            'title' => '性别',
+            'output' => function ($gender, $model) {
+                return $gender == 1 ? '男' : '女';
+            },
+        ],  
+        'introduction' => [
+            'title' => '个人介绍',
+            
+        ],   
 
         'operation' => [
             'title'  => '管理',
             'sortable' => false,
-        ],
+        ]
     ],
 
     // 『模型表单』设置项
     'edit_fields' => [
+        'department' => [
+            'title' => '单位',
+             // 指定数据的类型为关联模型
+            'type'       => 'relationship',
+
+            // 关联模型的字段，用来做关联显示
+            'name_field' => 'name',
+        ],
+         'title' => [
+            'title' => '职务',
+        ],
         'name' => [
             'title' => '用户名',
         ],
+        'mobile' => [
+            'title' => '手机号码',
+        ], 
         'email' => [
             'title' => '邮箱',
         ],
@@ -71,6 +117,12 @@ return [
             // 表单使用 input 类型 password
             'type' => 'password',
         ],
+         'weixin_openid' => [
+            'title' => 'openid',
+        ],        
+        'weixin_unionid' => [
+            'title' => 'unionid',
+        ],   
         'avatar' => [
             'title' => '用户头像',
 
@@ -80,6 +132,9 @@ return [
             // 图片上传必须设置图片存放路径
             'location' => public_path() . '/uploads/images/avatars/',
         ],
+         'gender' => [
+            'title' => '性别(1 男 0 女)',
+        ],   
         'roles' => [
             'title'      => '用户角色',
 
@@ -89,6 +144,10 @@ return [
             // 关联模型的字段，用来做关联显示
             'name_field' => 'name',
         ],
+         'introduction' => [
+            'title' => '个人介绍',
+            
+        ] 
     ],
 
     // 『数据过滤』设置
@@ -101,8 +160,8 @@ return [
         'name' => [
             'title' => '用户名',
         ],
-        'email' => [
-            'title' => '邮箱',
+        'mobile' => [
+            'title' => '手机号',
         ],
     ],
 ];
