@@ -26,7 +26,8 @@ Route::get('receptionclose/{reception}','ReceptionController@close')->name('rece
 // ajax get dishes
 Route::post('/getdish', 'PagesController@getdish');
 
-
+// 导出订单
+Route::get('/orderxls', 'PagesController@export')->name('order.export');;
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

@@ -21,9 +21,7 @@ return [
         'id' => [
             'title' => 'ID',
         ],
-        'no' => [
-            'title'    => '订单号',
-        ], 
+
         'department' => [
             
             'title'    => '部门',

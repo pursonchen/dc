@@ -10,6 +10,9 @@ use App\Models\OrderItem;
 use App\Models\Dish;
 use App\Models\Canteen;
 
+use App\Exports\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PagesController extends Controller
 {
@@ -167,5 +170,11 @@ class PagesController extends Controller
 
         $order->update(['closed' => true]);
         return redirect()->route('orders.list')->with('success', '取消订餐成功！');
+    }
+
+    // 导出订餐excel
+     public function export() 
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }

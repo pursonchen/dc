@@ -22,6 +22,20 @@ return [
             // 字数限制
             'limit' => 50,
         ],
+        'sms_alarm_eating' => [  
+            // 表单标题
+            'title' => '饭前短信提醒',
+
+            // 表单条目类型
+            'type' => 'bool',
+        ],        
+        'sms_alarm_ordering' => [  
+            // 表单标题
+            'title' => '订餐短信提醒',
+
+            // 表单条目类型
+            'type' => 'bool',
+        ],
         'contact_email' => [
             'title' => '联系人邮箱',
             'type' => 'text',

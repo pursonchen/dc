@@ -21,7 +21,7 @@ class CreateOrderItemsTable extends Migration
             $table->foreign('canteen_id')->references('id')->on('canteens');
             $table->unsignedInteger('meal_id')->comment('餐别id');
             $table->foreign('meal_id')->references('id')->on('meals');
-            $table->date('order_date')->comment('下单日期');
+            $table->date('order_date')->comment('用餐日期');
             $table->unsignedInteger('dish_id')->comment('菜品id');
             $table->foreign('dish_id')->references('id')->on('dishes');
             $table->unsignedInteger('amount')->default(1)->comment('数量');

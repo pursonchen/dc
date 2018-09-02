@@ -30,6 +30,11 @@ return array(
 *  ]
 */
 'menu' => [
+     '订餐统计' => [
+            'order_statuses',
+            'orders',
+            'receptions'
+        ],
      '用户与权限' => [
          'departments',
          'users',
@@ -42,10 +47,6 @@ return array(
         'dishtypes',
         'dishes',
      ],
-     '订餐明细' => [
-            'orders',
-            'receptions'
-        ],
      '站点管理' => [
             'settings.site',
         ],
@@ -70,7 +71,7 @@ return array(
 // 设置后台主页视图文件，由 `use_dashboard` 选项决定
 'dashboard_view' => '',
 // 用来作为后台主页的菜单条目，由 `use_dashboard` 选项决定，菜单指的是 `menu` 选项
-'home_page' => 'users',
+'home_page' => 'order_statuses',
 // 右上角『返回主站』按钮的链接
 'back_to_site_path' => '/',
 // 当选项 `permission` 权限检测不通过时，会重定向用户到此处设置的路径
