@@ -42,8 +42,9 @@ return array(
         'dishtypes',
         'dishes',
      ],
-     '订餐报表' => [
+     '订餐明细' => [
             'orders',
+            'receptions'
         ],
      '站点管理' => [
             'settings.site',

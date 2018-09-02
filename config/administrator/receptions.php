@@ -1,12 +1,12 @@
 <?php
-use App\Models\Order;
+use App\Models\Reception;
 return [
 
-    'title' => '个人订餐明细',
+    'title' => '接待订餐明细',
     
     'single'  => '订单',
 
-    'model'   => Order::class,
+    'model'   => Reception::class,
 
     'permission'=> function()
     {
@@ -31,13 +31,7 @@ return [
              return $model->user->department->name;
             },
 
-        ],  
-         'date' => [
-            'title'    => '用餐日期',
-             'output' => function ($order_date, $model) {
-             return $model->items[0]->dish->date;
-            },
-        ],           
+        ],         
         'user_id' => [
             'title'    => '订餐人',
              'output' => function ($user, $model) {
@@ -47,54 +41,25 @@ return [
         'canteen' => [
             'title'    => '餐厅',
              'output' => function ($canteen, $model) {
-             return $model->items[0]->canteen->name;
-            },
-        ],      
-        'dishes' => [
-            'title'    => '菜品',
-             'output' => function ($dish, $model) {
-               $dishes = '';
-               foreach ($model->items as $index => $item)
-                 {
-                    $dishes = $dishes .($index+1).'、('. $item->meal->name .')'. $item->dish->name . ';<br/>';
-                }
-             return $dishes;
+             return $model->canteen->name;
             },
         ],         
-     
-        'total_amount' => [
-            'title'    => '订单总价',
-        ],
-        'remark' => [
-            'title'    => '订单备注',
-            
-        ],  
-        // 'paid_at' => [
-        //     'title'    => '支付时间',
-            
-        // ],        
-        // 'payment_method' => [
-        //     'title'    => '支付方式',
-            
-        // ],        
-        // 'payment_no' => [
-        //     'title'    => '支付平台订单号',
-            
-        // ],           
-                
-        // 'refund_no' => [
-        //     'title'    => '退款单号',
-            
-        // ],           
-
-        //  'refund_status' => [
-        //     'title'    => '退款状态',
-            
-        // ],             
-        // 'extra' => [
-        //     'title'    => '额外数据',
-            
-        // ],           
+        'order_sdate' => [
+            'title'    => '用餐开始日期',
+        ],             
+        'order_edate' => [
+            'title'    => '用餐结束日期',
+        ],         
+        'std' => [
+            'title'    => '用餐标准',
+            'output' => function ($std, $model) {
+             return $std . '元/人';
+            },
+        ],         
+        'num' => [
+            'title'    => '用餐人数',
+        ],      
+       
         'created_at' => [
             'title'    => '订单创建日期',
             
@@ -111,6 +76,10 @@ return [
 
             
         ],
+         'description' => [
+            'title'    => '订单备注',
+            
+        ],  
         'operation' => [
             'title'  => '管理',
             'sortable' => false,
