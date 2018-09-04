@@ -21,7 +21,7 @@
         @include('layouts._header')
 
         <div class="container">
-           @if (if_route('root') || if_route('reception'))
+           @if (if_route('root') || if_route('reception') || if_route('login'))
            @else
            <div id="backbutton">
                 <span class="glyphicon glyphicon-chevron-left  ">返回</span>
